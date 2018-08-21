@@ -1,0 +1,22 @@
+# Gradle
+.gradle/
+build/
+out/
+gradle/
+#logs
+logs/
+log/
+gradlew
+gradlew.bat
+
+
+# IntelliJ IDEA
+.idea/
+*.iml
+out/
+#Specific
+*.DS_Store
+classes/
+out/
+
+*.orig

@@ -1,0 +1,27 @@
+image: gradle:4.1.0-jdk8
+
+variables:
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+  DOCKER_DRIVER: overlay
+
+stages:
+  - build_jar
+  - push_jar
+
+gradle-build:
+  stage: build_jar
+  script:
+    - gradle -g /cache/.gradle clean test build
+  artifacts:
+    paths:
+      - /builds/autotests/test-mapper/build/libs/*.jar
+    when: on_success
+    expire_in: 1h
+
+
+gradle-upload:
+  stage: push_jar
+  script:
+    - gradle -g /cache/.gradle upload
+  dependencies:
+    - gradle-build
